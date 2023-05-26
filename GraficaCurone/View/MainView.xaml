@@ -9,10 +9,6 @@
         FlyoutVerticalScrollMode="Auto"
         BackgroundColor="#1d4d3b">
 
-    <Shell.BindingContext>
-        <vm:ViewModel/>
-    </Shell.BindingContext>
-
     <Shell.FlyoutHeader>
         <Grid BackgroundColor="#2c674f"
               HeightRequest="70"
@@ -153,19 +149,17 @@
                                HorizontalOptions="Center"/>
                     </VerticalStackLayout>
                 </Frame>
-                <!--<Frame x:Name="FrameQR" IsVisible="{Binding CameraVisible}">
+                <Frame x:Name="FrameQR" IsVisible="{Binding CameraVisible}">
                     <VerticalStackLayout
                         Spacing="25"
                         Padding="30,0"
                         VerticalOptions="Center">
                         <Label x:Name="Qr" FontSize="20"/>
-                        <cv:CameraView x:Name="cameraView" WidthRequest="300" HeightRequest="200" 
-                                       BarCodeDetectionEnabled="True"
-                                       Cameras="{Binding Cameras}"
-                                       Camera="{Binding Camera}"
-                                       AutoStartPreview="{Binding AutoStartPreview}"/>
+                        <cv:CameraView x:Name="cameraView" WidthRequest="300" HeightRequest="200" BarCodeDetectionEnabled="True"
+                                       CamerasLoaded="CameraLoaded"
+                                       BarcodeDetected="BarcodeDetected"/>
                     </VerticalStackLayout>
-                </Frame>-->
+                </Frame>
             </VerticalStackLayout>
 
         </ContentPage>
