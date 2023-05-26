@@ -121,10 +121,14 @@ namespace GraficaCurone.ViewModel
         }
         public async Task BarCodeResultAsync(BarcodeEventArgs args)
         {
-            //MainThread.BeginInvokeOnMainThread(() =>
-            //{
-            //    Qr.Text = $"{args.Result[0].BarcodeFormat}: {args.Result[0].Text}";
-            //});
+            if (args == null) { }
+            MainThread.BeginInvokeOnMainThread(async() =>
+            {
+                await trackManager.PlayTheTrack(int.Parse(args.Result[0].Text));
+                MapVisible = true;
+                CompassVisible = false;
+                CameraVisible = false;
+            });
         }
         #endregion
         #endregion
