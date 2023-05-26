@@ -7,8 +7,9 @@ public partial class MainPage : Shell
     public bool MappaVisibile = true;
     public bool BussolaVisibile = false;
     public bool QrVisibile = false;
+    public const string MIME_TYPE = "application/com.companyname.nfcsample";
 
-	public MainPage()
+    public MainPage()
 	{
 		InitializeComponent();
 	}

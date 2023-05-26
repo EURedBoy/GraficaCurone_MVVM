@@ -1,5 +1,6 @@
 using Camera.MAUI;
 using GraficaCurone.ViewModel;
+
 namespace GraficaCurone.View;
 
 public partial class MainView : Shell
@@ -24,4 +25,11 @@ public partial class MainView : Shell
     {
         await mainViewModel.BarCodeResultAsync(args);
     }
+
+    protected override async void OnAppearing()
+    {
+        await mainViewModel.trackManager.Init();
+        await mainViewModel.nfcManager.Init();
+    }
+
 }

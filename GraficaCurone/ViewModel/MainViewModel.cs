@@ -2,7 +2,9 @@
 using Camera.MAUI.ZXingHelper;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using GraficaCurone.Manager;
 using GraficaCurone.View;
+using Plugin.Maui.Audio;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,7 +15,7 @@ namespace GraficaCurone.ViewModel
 {
     public partial class MainViewModel : ObservableObject
     {
-        #region Variabili
+        #region Variabili_Parte_Grafica
         [ObservableProperty]
         private bool selected;
         [ObservableProperty]
@@ -27,6 +29,8 @@ namespace GraficaCurone.ViewModel
         [ObservableProperty]
         private string textCompass;
         private CameraView cameraView;
+        public NFCManager nfcManager { get; set; }
+        public TrackManager trackManager { get; set; }
         #endregion
 
 
@@ -34,8 +38,11 @@ namespace GraficaCurone.ViewModel
         {
             MapVisible = true;
             cameraView = mainView.camera;
+            trackManager = new TrackManager(AudioManager.Current);
+            nfcManager = new NFCManager(trackManager);
         }
 
+        #region MetodiPagine
         #region ChooseThePage
         [RelayCommand]
         public void SwitchPage(string pageType)
@@ -91,6 +98,15 @@ namespace GraficaCurone.ViewModel
         }
         #endregion
 
+        #region Camera
+
+        private void ShowCamera()
+        {
+            MapVisible = false;
+            CompassVisible = false;
+            CameraVisible = true;
+        }
+
         public async Task CameraLoadAsync()
         {
             if (cameraView.Cameras.Count > 0)
@@ -110,12 +126,8 @@ namespace GraficaCurone.ViewModel
             //    Qr.Text = $"{args.Result[0].BarcodeFormat}: {args.Result[0].Text}";
             //});
         }
+        #endregion
+        #endregion
 
-        private void ShowCamera() 
-        {
-            MapVisible = false;
-            CompassVisible = false;
-            CameraVisible = true;
-        }  
     }
 }
