@@ -116,6 +116,7 @@ namespace GraficaCurone.ViewModel
                 {
                     await cameraView.StopCameraAsync();
                     await cameraView.StartCameraAsync();
+                    Thread.Sleep(50);
                 });
             }
         }
@@ -125,6 +126,7 @@ namespace GraficaCurone.ViewModel
             MainThread.BeginInvokeOnMainThread(async() =>
             {
                 await trackManager.PlayTheTrack(int.Parse(args.Result[0].Text));
+                await cameraView.StopCameraAsync();
                 MapVisible = true;
                 CompassVisible = false;
                 CameraVisible = false;
