@@ -111,10 +111,10 @@
                 </Grid>
                 <Frame Margin="20" x:Name="FrameMappa" BackgroundColor="Transparent" Padding="0" BorderColor="Transparent" IsVisible="{Binding MapVisible}">
                     <VerticalStackLayout>
-                        <Frame HeightRequest="200" CornerRadius="15">
-                            <Image Source="dotnet_bot.svg"/>
+                        <Frame HeightRequest="300" WidthRequest="300" CornerRadius="15" BackgroundColor="#2c674f">
+                            <Image Source="{Binding trackManager.PathImage}"/>
                         </Frame>
-                        <Frame Margin="0, 20, 0, 0" HeightRequest="400" CornerRadius="15" >
+                        <Frame Margin="0, 20, 0, 0" HeightRequest="400" CornerRadius="15" BackgroundColor="#2c674f" >
                             <ScrollView>
                                 <Label Text="{Binding trackManager.CurrentText}"
                                        TextColor="Black"
@@ -167,7 +167,11 @@
     </FlyoutItem>
     <FlyoutItem Title="Impostazioni" Icon="iconsettings.svg">
         <ContentPage Title="Impostazioni" BackgroundColor="#1d4d3b">
-
+            <VerticalStackLayout>
+                <Button x:Name="BottoneLingua" Text="Lingua" HorizontalOptions="Center"
+                        Command="{Binding BottoneLinguaClickedCommand}"/>
+            </VerticalStackLayout>
+            
         </ContentPage>
     </FlyoutItem>
     <FlyoutItem Title="Aiuto" Icon="iconsinterrogativo.png">

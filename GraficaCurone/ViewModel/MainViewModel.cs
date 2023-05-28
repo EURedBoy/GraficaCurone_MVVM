@@ -28,6 +28,8 @@ namespace GraficaCurone.ViewModel
         private double rotation;
         [ObservableProperty]
         private string textCompass;
+
+
         private CameraView cameraView;
         public NFCManager nfcManager { get; set; }
         public TrackManager trackManager { get; set; }
@@ -43,6 +45,25 @@ namespace GraficaCurone.ViewModel
         }
 
         #region MetodiPagine
+
+        [RelayCommand]
+        public async void BottoneLinguaClicked(EventArgs e)
+        {
+            string linguaScelta;
+            linguaScelta = await App.Current.MainPage.DisplayActionSheet("Select language:", "Cancel", null, "italiano", "english");
+
+            if (linguaScelta == "italiano")
+            {
+                trackManager.InEnglish = false;
+            }
+            else
+            {
+                trackManager.InEnglish = true;
+            }
+
+
+        }
+
         #region ChooseThePage
         [RelayCommand]
         public void SwitchPage(string pageType)

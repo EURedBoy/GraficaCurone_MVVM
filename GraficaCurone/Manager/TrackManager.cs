@@ -14,10 +14,15 @@ namespace GraficaCurone.Manager
         #region Variabili
         [ObservableProperty]
         private string currentText;
+
+        [ObservableProperty]
+        public string pathImage = "mappa.png";
+
+        public List<string> percorsoImmagini = new List<string>(5);
         public List<string> tracceAudio = new List<string>(5);
         public List<string> tracceTesto = new List<string>(5);
         public IAudioPlayer player;
-        private bool InEnglish = false;
+        public bool InEnglish;
         private IAudioManager audioManager;
         #endregion
 
@@ -40,6 +45,7 @@ namespace GraficaCurone.Manager
             {
                 for (int i = 1; i < tracceTesto.Capacity + 1; i++)
                 {
+                    percorsoImmagini.Add($"mappa{i}.png");
                     tracceAudio.Add($"audioTrack_{i}.mp3");
                     path = $"textTrack_{i}.txt";
                     var result = await FileSystem.OpenAppPackageFileAsync(path);
@@ -51,6 +57,7 @@ namespace GraficaCurone.Manager
             {
                 for (int i = 1; i < tracceTesto.Capacity + 1; i++)
                 {
+                    percorsoImmagini.Add($"mappa{i}.png");
                     tracceAudio.Add($"tracceAudio_{i}.mp3");
                     path = $"tracceTesto_{i}.txt";
                     var result = await FileSystem.OpenAppPackageFileAsync(path);
@@ -62,7 +69,11 @@ namespace GraficaCurone.Manager
 
         public async Task PlayTheTrack(int i)
         {
+            if (i < 1 || i >= tracceTesto.Count)
+                return;
+
             CurrentText = tracceTesto[i];
+            PathImage = percorsoImmagini[i];
             player = audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(tracceAudio[i]));
             if (player == null) { return; }
             player.Play();
@@ -71,18 +82,13 @@ namespace GraficaCurone.Manager
         public void Accelerometer_ShakeDetected(object sender, EventArgs e)
         {
             if (player == null || player == default)
-            {
                 return;
-            }
 
             if (!player.IsPlaying)
-            {
                 player.Play();
-            }
+
             else
-            {
                 player.Pause();
-            }
         }
 
         public void StartAccelerometer()
@@ -91,13 +97,11 @@ namespace GraficaCurone.Manager
             {
                 if (!Accelerometer.Default.IsMonitoring)
                 {
-                    // Turn on accelerometer
                     Accelerometer.Default.ShakeDetected += Accelerometer_ShakeDetected;
-                    Accelerometer.Default.Start(SensorSpeed.UI);
+                    Accelerometer.Default.Start(SensorSpeed.Fastest);
                 }
                 else
                 {
-                    // Turn off accelerometer
                     Accelerometer.Default.Stop();
                     Accelerometer.Default.ShakeDetected -= Accelerometer_ShakeDetected;
                 }

@@ -72,16 +72,20 @@ public partial class NFCManager : ObservableObject
 
         if (!tagInfo.IsSupported)
         {
-            await ShowAlert("Unsupported tag (app)", title);
+            return;
         }
         else if (tagInfo.IsEmpty)
         {
-            await ShowAlert("Empty tag", title);
+            return;
         }
         else
         {
-            var first = tagInfo.Records[0];
-            await trackManager.PlayTheTrack(int.Parse(first.Message) - 1);
+            int n;
+            bool success = int.TryParse(tagInfo.Records[0].Message, out n);
+            if (!success)
+                return;
+
+            await trackManager.PlayTheTrack(n-1);
         }
     }
 
