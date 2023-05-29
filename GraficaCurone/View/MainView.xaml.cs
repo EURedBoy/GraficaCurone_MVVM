@@ -8,17 +8,28 @@ public partial class MainView : Shell
 	public CameraView camera { get; set; }
     private MainViewModel mainViewModel;
 
+    bool i = true;
+
     public MainView()
 	{
 		InitializeComponent();
-        camera = cameraView;
         mainViewModel = new MainViewModel(this);
         BindingContext = mainViewModel;
 	}
 
-    private async void CameraLoaded(object sender, EventArgs e)
+    private void CameraLoaded(object sender, EventArgs e)
     {
-        await mainViewModel.CameraLoadAsync();
+        //await mainViewModel.CameraLoadAsync();
+        if (cameraView.Cameras.Count > 0)
+        {
+            cameraView.Camera = cameraView.Cameras.First();
+
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await cameraView.StopCameraAsync();
+                await cameraView.StartCameraAsync();
+            });
+        }
     }
 
     private async void BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
@@ -32,4 +43,14 @@ public partial class MainView : Shell
         await mainViewModel.nfcManager.Init();
     }
 
+    private async void OnAppearing(object sender, EventArgs e)
+    {
+        if (i)
+        {
+            i = false;
+            return;
+        }
+        camera = cameraView;
+        CameraLoaded(sender, e);
+    }
 }

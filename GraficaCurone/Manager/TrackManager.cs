@@ -24,6 +24,7 @@ namespace GraficaCurone.Manager
         public IAudioPlayer player;
         public bool InEnglish;
         private IAudioManager audioManager;
+        public int LastTrack { get; set; }
         #endregion
 
         public TrackManager(IAudioManager audioManager)
@@ -80,6 +81,8 @@ namespace GraficaCurone.Manager
         {
             if (i < 1 || i >= tracceTesto.Count)
                 return;
+
+            LastTrack = i;
 
             CurrentText = tracceTesto[i];
             PathImage = percorsoImmagini[i];

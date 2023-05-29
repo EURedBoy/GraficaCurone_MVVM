@@ -2,6 +2,7 @@
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 
+
 namespace GraficaCurone;
 
 public static class MauiProgram

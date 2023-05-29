@@ -31,6 +31,7 @@ namespace GraficaCurone.ViewModel
 
 
         private CameraView cameraView;
+        private MainView mainView;
         public NFCManager nfcManager { get; set; }
         public TrackManager trackManager { get; set; }
         #endregion
@@ -39,6 +40,7 @@ namespace GraficaCurone.ViewModel
         public MainViewModel(MainView mainView) 
         {
             MapVisible = true;
+            this.mainView = mainView;
             cameraView = mainView.camera;
             trackManager = new TrackManager(AudioManager.Current);
             nfcManager = new NFCManager(trackManager);
@@ -121,23 +123,27 @@ namespace GraficaCurone.ViewModel
 
         #region Camera
 
-        private void ShowCamera()
+        private async void ShowCamera()
         {
             MapVisible = false;
             CompassVisible = false;
             CameraVisible = true;
+
+            //await CameraLoadAsync();
         }
 
         public async Task CameraLoadAsync()
         {
-            if (cameraView.Cameras.Count > 0)
+            if (mainView.camera.Cameras.Count > 0)
             {
-                cameraView.Camera = cameraView.Cameras.First();
+                mainView.camera.Camera = mainView.camera.Cameras.First();
+
+                if (mainView.camera ==  null) return;
+
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    await cameraView.StopCameraAsync();
-                    await cameraView.StartCameraAsync();
-                    Thread.Sleep(50);
+                    await mainView.camera.StopCameraAsync();
+                    await mainView.camera.StartCameraAsync();
                 });
             }
         }
@@ -147,7 +153,7 @@ namespace GraficaCurone.ViewModel
             MainThread.BeginInvokeOnMainThread(async() =>
             {
                 await trackManager.PlayTheTrack(int.Parse(args.Result[0].Text));
-                await cameraView.StopCameraAsync();
+                //await cameraView.StopCameraAsync();
                 MapVisible = true;
                 CompassVisible = false;
                 CameraVisible = false;
