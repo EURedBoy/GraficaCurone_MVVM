@@ -63,6 +63,7 @@ namespace GraficaCurone.ViewModel
                 trackManager.InEnglish = true;
             }
             await trackManager.LoadTracksAsync();
+            trackManager.secondi = trackManager.player.CurrentPosition;
             await trackManager.PlayTheTrack(trackManager.LastTrack);
         }
 
@@ -129,7 +130,7 @@ namespace GraficaCurone.ViewModel
             CompassVisible = false;
             CameraVisible = true;
 
-            mainView.CameraLoaded(null, null);
+            mainView.camera.BarCodeDetectionEnabled = true;
         }
 
         public async Task CameraLoadAsync()
@@ -153,13 +154,14 @@ namespace GraficaCurone.ViewModel
             MainThread.BeginInvokeOnMainThread(async() =>
             {
                 await trackManager.PlayTheTrack(int.Parse(args.Result[0].Text));
-
+                mainView.camera.BarCodeDetectionEnabled = false;
                 MapVisible = true;
                 CompassVisible = false;
                 CameraVisible = false;
             });
         }
         #endregion
+
         #endregion
 
     }

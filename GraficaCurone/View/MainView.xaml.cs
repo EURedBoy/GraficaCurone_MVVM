@@ -34,7 +34,6 @@ public partial class MainView : Shell
 
     private async void BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
     {
-        await cameraView.StopCameraAsync();
         await mainViewModel.BarCodeResultAsync(args);
     }
 
@@ -42,6 +41,7 @@ public partial class MainView : Shell
     {
         await mainViewModel.trackManager.Init();
         await mainViewModel.nfcManager.Init();
+        camera = cameraView;
     }
 
     private async void OnAppearing(object sender, EventArgs e)

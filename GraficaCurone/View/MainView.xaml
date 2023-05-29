@@ -36,7 +36,7 @@
         <ContentPage Title="Home" Background="#1d4d3b">
             <ScrollView>
                 <VerticalStackLayout Margin="0,20,0,0">
-                    <Grid RowDefinitions="*,20,*"
+                    <Grid RowDefinitions="*,20*,*"
                   ColumnDefinitions="*,*,*,*,10*,*,*,*,*">
                         <Frame Grid.Row="1"
                     Grid.Column="3"

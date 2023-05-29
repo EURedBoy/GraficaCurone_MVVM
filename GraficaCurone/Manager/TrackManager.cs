@@ -21,6 +21,7 @@ namespace GraficaCurone.Manager
         public List<string> percorsoImmagini = new List<string>(5);
         public List<string> tracceAudio = new List<string>(5);
         public List<string> tracceTesto = new List<string>(5);
+        public double secondi = 0;
         public IAudioPlayer player;
         public bool InEnglish;
         private IAudioManager audioManager;
@@ -90,6 +91,7 @@ namespace GraficaCurone.Manager
 
             player = audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(tracceAudio[i]));
             if (player == null) { return; }
+            player.Seek(secondi);
             player.Play();
         }
 
