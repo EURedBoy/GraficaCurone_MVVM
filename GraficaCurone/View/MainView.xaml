@@ -9,7 +9,7 @@
         FlyoutVerticalScrollMode="Auto"
         BackgroundColor="#1d4d3b"
         x:DataType="vm:MainViewModel">
-    
+
     <Shell.FlyoutHeader>
         <Grid BackgroundColor="#2c674f"
               HeightRequest="70"
@@ -32,22 +32,23 @@
                    FontFamily="BoldenaBold-VGjmz"/>
         </Grid>
     </Shell.FlyoutFooter>
-    <FlyoutItem Title="Casa" Icon="iconhome.svg" Appearing="OnAppearing">
-        <ContentPage Title="Casa" Background="#1d4d3b">
-            <VerticalStackLayout Margin="0,20,0,0">
-                <Grid RowDefinitions="*,20*,*"
+    <FlyoutItem Title="Home" Icon="iconhome.svg" Appearing="OnAppearing">
+        <ContentPage Title="Home" Background="#1d4d3b">
+            <ScrollView>
+                <VerticalStackLayout Margin="0,20,0,0">
+                    <Grid RowDefinitions="*,20,*"
                   ColumnDefinitions="*,*,*,*,10*,*,*,*,*">
-                    <Frame Grid.Row="1"
+                        <Frame Grid.Row="1"
                     Grid.Column="3"
                     Grid.ColumnSpan="3"
                     CornerRadius="15"
                     BackgroundColor="#224436"
                     BorderColor="#224436"
                     Padding="0">
-                        <Grid ColumnDefinitions="*,*,*"
+                            <Grid ColumnDefinitions="*,*,*"
                         RowDefinitions="*">
-                            <!--Tasto Mappa-->
-                            <Button
+                                <!--Tasto Mappa-->
+                                <Button
                             x:Name="MappaButton"
                             Grid.Column="0"
                             Text="Mappa"
@@ -55,19 +56,19 @@
                             Command="{Binding SwitchPageCommand}"
                             CommandParameter="showmap"
                                 >
-                                <Button.Triggers>
-                                    <DataTrigger TargetType="Button" Binding="{Binding MapVisible}" Value="True">
-                                        <Setter Property="BackgroundColor" Value="White" />
-                                        <Setter Property="TextColor" Value="Black" />
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Button" Binding="{Binding MapVisible}" Value="False">
-                                        <Setter Property="BackgroundColor" Value="#224436" />
-                                        <Setter Property="TextColor" Value="White" />
-                                    </DataTrigger>
-                                </Button.Triggers>
-                            </Button>
+                                    <Button.Triggers>
+                                        <DataTrigger TargetType="Button" Binding="{Binding MapVisible}" Value="True">
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                            <Setter Property="TextColor" Value="Black" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Button" Binding="{Binding MapVisible}" Value="False">
+                                            <Setter Property="BackgroundColor" Value="#224436" />
+                                            <Setter Property="TextColor" Value="White" />
+                                        </DataTrigger>
+                                    </Button.Triggers>
+                                </Button>
                                 <!--Tasto Bussola-->
-                            <Button
+                                <Button
                             x:Name="BussolaButton"
                             Grid.Column="1"
                             Text="Bussola"
@@ -75,19 +76,19 @@
                             Command="{Binding SwitchPageCommand}"
                             CommandParameter="showcompass"
                             BackgroundColor="Transparent">
-                                <Button.Triggers>
-                                    <DataTrigger TargetType="Button" Binding="{Binding CompassVisible}" Value="True">
-                                        <Setter Property="BackgroundColor" Value="White" />
-                                        <Setter Property="TextColor" Value="Black" />
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Button" Binding="{Binding CompassVisible}" Value="False">
-                                        <Setter Property="BackgroundColor" Value="#224436" />
-                                        <Setter Property="TextColor" Value="White" />
-                                    </DataTrigger>
-                                </Button.Triggers>
-                            </Button>
-                            <!--Tasto QR Code-->
-                            <Button
+                                    <Button.Triggers>
+                                        <DataTrigger TargetType="Button" Binding="{Binding CompassVisible}" Value="True">
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                            <Setter Property="TextColor" Value="Black" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Button" Binding="{Binding CompassVisible}" Value="False">
+                                            <Setter Property="BackgroundColor" Value="#224436" />
+                                            <Setter Property="TextColor" Value="White" />
+                                        </DataTrigger>
+                                    </Button.Triggers>
+                                </Button>
+                                <!--Tasto QR Code-->
+                                <Button
                             x:Name="QRButton"
                             Grid.Column="2"
                             Text="QR Code"
@@ -95,76 +96,74 @@
                             Command="{Binding SwitchPageCommand}"
                             CommandParameter="showcamera"
                             BackgroundColor="Transparent">
-                                <Button.Triggers>
-                                <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="True">
-                                    <Setter Property="BackgroundColor" Value="White" />
-                                    <Setter Property="TextColor" Value="Black" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="False">
-                                        <Setter Property="BackgroundColor" Value="#224436" />
-                                    <Setter Property="TextColor" Value="White" />
-                                </DataTrigger>
-                                </Button.Triggers>
-                            </Button>
-                        </Grid>
-                    </Frame>
-                </Grid>
-                <Frame Margin="20" x:Name="FrameMappa" BackgroundColor="Transparent" Padding="0" BorderColor="Transparent" IsVisible="{Binding MapVisible}">
-                    <VerticalStackLayout>
-                        <Frame HeightRequest="300" WidthRequest="300" CornerRadius="15" BackgroundColor="#2c674f">
-                            <Image Source="{Binding trackManager.PathImage}" />
+                                    <Button.Triggers>
+                                        <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="True">
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                            <Setter Property="TextColor" Value="Black" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="False">
+                                            <Setter Property="BackgroundColor" Value="#224436" />
+                                            <Setter Property="TextColor" Value="White" />
+                                        </DataTrigger>
+                                    </Button.Triggers>
+                                </Button>
+                            </Grid>
                         </Frame>
-                        <Frame Margin="0, 20, 0, 0" HeightRequest="400" CornerRadius="15" BackgroundColor="#2c674f" >
-                            <ScrollView>
-                                <Label Text="{Binding trackManager.CurrentText}"
-                                       TextColor="Black"
-                                       FontSize="18"
+                    </Grid>
+                    <Frame Margin="20" x:Name="FrameMappa" BackgroundColor="Transparent" Padding="0" BorderColor="Transparent" IsVisible="{Binding MapVisible}">
+                        <VerticalStackLayout>
+                            <Frame HeightRequest="300" WidthRequest="300" CornerRadius="15" BackgroundColor="#2c674f">
+                                <Image Source="{Binding trackManager.PathImage}" />
+                            </Frame>
+                            <Frame Margin="0, 20, 0, 0" HeightRequest="500" CornerRadius="15" BackgroundColor="#2c674f">
+                                <ScrollView>
+                                    <Label
+                                        Text="{Binding trackManager.CurrentText}"
+                                       TextColor="White"
+                                       FontSize="15"
                                        FontAttributes="Bold"
-                                       HorizontalTextAlignment="Center"/>
-                            </ScrollView>
-                        </Frame>
-                    </VerticalStackLayout>
-                </Frame>
-                <Frame Margin="20" x:Name="FrameBussola" IsVisible="{Binding CompassVisible}" BackgroundColor="Transparent" BorderColor="Transparent">
-                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Image
+                                       HorizontalTextAlignment="Center" />
+                                </ScrollView>
+                            </Frame>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame Margin="20" x:Name="FrameBussola" IsVisible="{Binding CompassVisible}" BackgroundColor="Transparent" BorderColor="Transparent">
+                        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Image
                                     x:Name="Bussola"
                                     Rotation="{Binding Rotation}"
                                     Source="bussolaverd.png"
                                     WidthRequest="300"
                                     HeightRequest="300"/>
-                            <!--<Image Source="freccia.png" WidthRequest="100"/>-->
-                        </Grid>
-                        <Label x:Name="testoBuss" 
+                            </Grid>
+                            <Label x:Name="testoBuss" 
                             Text="{Binding TextCompass}"
                                TextColor="White"
                                FontSize="60"
                                FontAttributes="Bold"
                                HorizontalOptions="Center"/>
-                    </VerticalStackLayout>
-                </Frame>
-                <Frame x:Name="FrameQR" IsVisible="{Binding CameraVisible}" BackgroundColor="Transparent" BorderColor="Transparent">
-                    <VerticalStackLayout
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame x:Name="FrameQR" IsVisible="{Binding CameraVisible}" BackgroundColor="#2c674f" Margin="20">
+                        <VerticalStackLayout
                         x:Name="vStack"
                         Spacing="25"
                         Padding="30,0"
                         VerticalOptions="Center">
-                        <Label x:Name="Qr" FontSize="20"/>
-                        <cv:CameraView x:Name="cameraView" WidthRequest="400" HeightRequest="300" BarCodeDetectionEnabled="True"
+                            <cv:CameraView x:Name="cameraView" WidthRequest="400" HeightRequest="300" BarCodeDetectionEnabled="True"
                                        CamerasLoaded="CameraLoaded"
                                        BarcodeDetected="BarcodeDetected"/>
-
-                    </VerticalStackLayout>
-                </Frame>
-            </VerticalStackLayout>
-
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+            </ScrollView>
         </ContentPage>
     </FlyoutItem>
     <FlyoutItem Title="Impostazioni" Icon="iconsettings.svg">
@@ -181,30 +180,3 @@
         </ContentPage>
     </FlyoutItem>
 </Shell>
-
-
-<!--<Label Grid.Row="3"/>
-<Grid
-                    Grid.Row="4"
-                    Grid.ColumnSpan="5">
-
-</Grid>
--->
-<!--Spazio-->
-<!--
-    <Label Grid.Row="5"/>
--->
-<!--Bordo testo-->
-<!--
-    <Border
-    VerticalOptions="Fill"
-    HorizontalOptions="Fill"
-    BackgroundColor="White"
-    Grid.Row="6"
-    Grid.Column="1"
-    Grid.ColumnSpan="7">
-    <Border.StrokeShape>
-    <RoundRectangle CornerRadius="28"/>
-        </Border.StrokeShape>
-    </Border>
-</Grid>-->

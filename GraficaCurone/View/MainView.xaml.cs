@@ -17,7 +17,7 @@ public partial class MainView : Shell
         BindingContext = mainViewModel;
 	}
 
-    private void CameraLoaded(object sender, EventArgs e)
+    public void CameraLoaded(object sender, EventArgs e)
     {
         //await mainViewModel.CameraLoadAsync();
         if (cameraView.Cameras.Count > 0)
@@ -34,6 +34,7 @@ public partial class MainView : Shell
 
     private async void BarcodeDetected(object sender, Camera.MAUI.ZXingHelper.BarcodeEventArgs args)
     {
+        await cameraView.StopCameraAsync();
         await mainViewModel.BarCodeResultAsync(args);
     }
 

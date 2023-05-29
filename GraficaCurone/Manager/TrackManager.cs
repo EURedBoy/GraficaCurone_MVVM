@@ -62,7 +62,6 @@ namespace GraficaCurone.Manager
                     tracceTesto.Add(stream.ReadToEnd());
                 }
             }
-
             else
             {
                 for (int i = 1; i < tracceTesto.Capacity + 1; i++)
@@ -86,6 +85,9 @@ namespace GraficaCurone.Manager
 
             CurrentText = tracceTesto[i];
             PathImage = percorsoImmagini[i];
+
+            if (player != null && player.IsPlaying) player.Dispose();
+
             player = audioManager.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(tracceAudio[i]));
             if (player == null) { return; }
             player.Play();

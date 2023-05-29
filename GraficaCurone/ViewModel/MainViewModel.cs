@@ -63,7 +63,7 @@ namespace GraficaCurone.ViewModel
                 trackManager.InEnglish = true;
             }
             await trackManager.LoadTracksAsync();
-
+            await trackManager.PlayTheTrack(trackManager.LastTrack);
         }
 
         #region ChooseThePage
@@ -129,7 +129,7 @@ namespace GraficaCurone.ViewModel
             CompassVisible = false;
             CameraVisible = true;
 
-            //await CameraLoadAsync();
+            mainView.CameraLoaded(null, null);
         }
 
         public async Task CameraLoadAsync()
@@ -153,7 +153,7 @@ namespace GraficaCurone.ViewModel
             MainThread.BeginInvokeOnMainThread(async() =>
             {
                 await trackManager.PlayTheTrack(int.Parse(args.Result[0].Text));
-                //await cameraView.StopCameraAsync();
+
                 MapVisible = true;
                 CompassVisible = false;
                 CameraVisible = false;
