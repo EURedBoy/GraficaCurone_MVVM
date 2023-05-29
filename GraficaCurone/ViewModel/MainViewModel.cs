@@ -60,7 +60,7 @@ namespace GraficaCurone.ViewModel
             {
                 trackManager.InEnglish = true;
             }
-
+            await trackManager.LoadTracksAsync();
 
         }
 

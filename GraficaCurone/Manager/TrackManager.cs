@@ -40,7 +40,15 @@ namespace GraficaCurone.Manager
 
         public async Task LoadTracksAsync()
         {
+            if (tracceTesto.Count != 0 || tracceAudio.Count != 0)
+            {
+                tracceAudio.Clear();
+                tracceTesto.Clear();
+                percorsoImmagini.Clear();
+            }
+
             var path = "";
+
             if (InEnglish)
             {
                 for (int i = 1; i < tracceTesto.Capacity + 1; i++)
@@ -53,6 +61,7 @@ namespace GraficaCurone.Manager
                     tracceTesto.Add(stream.ReadToEnd());
                 }
             }
+
             else
             {
                 for (int i = 1; i < tracceTesto.Capacity + 1; i++)
