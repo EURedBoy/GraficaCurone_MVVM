@@ -5,6 +5,7 @@
         xmlns:vm="clr-namespace:GraficaCurone.ViewModel"
         xmlns:cv="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
         xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+        xmlns:lang="clr-namespace:GraficaCurone.Resources.Languages"
         FlyoutBehavior="Flyout"
         FlyoutHeaderBehavior="Fixed"
         FlyoutVerticalScrollMode="Auto"
@@ -160,7 +161,7 @@
             </ScrollView>
         </ContentPage>
     </FlyoutItem>
-    <FlyoutItem Title="Impostazioni" Icon="iconsettings.svg">
+    <FlyoutItem Title="{}" Icon="iconsettings.svg">
         <ContentPage Title="Impostazioni" BackgroundColor="{AppThemeBinding Light={StaticResource LightBackGround}, Dark={StaticResource DarkBackGround}}" Padding="10">
             <VerticalStackLayout>
                 <Label Text="Scegli la lingua:"

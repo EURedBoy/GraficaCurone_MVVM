@@ -30,10 +30,6 @@
     <Color x:Key="DarkFlyout">#1d4d3b</Color>
     <Color x:Key="LightFlyout">#4a8c6c</Color>
 
-
-
-
-
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
