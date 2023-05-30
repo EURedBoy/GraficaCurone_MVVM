@@ -43,7 +43,7 @@ namespace GraficaCurone.ViewModel
             this.mainView = mainView;
             cameraView = mainView.camera;
             trackManager = new TrackManager(AudioManager.Current);
-            nfcManager = new NFCManager(trackManager);
+            nfcManager = new NFCManager(trackManager, this);
         }
 
         #region MetodiPagine
@@ -58,10 +58,15 @@ namespace GraficaCurone.ViewModel
             {
                 trackManager.InEnglish = false;
             }
-            else
+            else if(linguaScelta == "english")
             {
                 trackManager.InEnglish = true;
             }
+            else
+            {
+                return;
+            }
+            
             await trackManager.LoadTracksAsync();
             trackManager.secondi = trackManager.player.CurrentPosition;
             await trackManager.PlayTheTrack(trackManager.LastTrack);

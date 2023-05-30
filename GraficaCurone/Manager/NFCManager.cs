@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using GraficaCurone.View;
+using GraficaCurone.ViewModel;
 using Plugin.NFC;
 using System;
 using System.Collections.Generic;
@@ -17,12 +19,13 @@ public partial class NFCManager : ObservableObject
     bool _eventsAlreadySubscribed = false;
     bool _isDeviceiOS = false;
     private TrackManager trackManager;
+    public MainViewModel mainViewModel;
     #endregion
 
-    public NFCManager(TrackManager trackManager)
+    public NFCManager(TrackManager trackManager, MainViewModel mainViewModel)
     {
         this.trackManager = trackManager;
-
+        this.mainViewModel = mainViewModel;
     }
 
     #region Property per NFC
@@ -84,7 +87,9 @@ public partial class NFCManager : ObservableObject
             bool success = int.TryParse(tagInfo.Records[0].Message, out n);
             if (!success)
                 return;
-
+            mainViewModel.MapVisible = true;
+            mainViewModel.CompassVisible = false;
+            mainViewModel.CameraVisible = false;
             await trackManager.PlayTheTrack(n-1);
         }
     }
