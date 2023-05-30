@@ -17,10 +17,20 @@
     <Color x:Key="Gray600">#404040</Color>
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
-    <Color x:Key="DarkPressedButton">#033711</Color>
-    <Color x:Key="LightPressedButton">#0ac63f</Color>
-    <Color x:Key="DarkFrameButton">#224436</Color>
     
+    <Color x:Key="DarkFrame">#2c674f</Color>
+    <Color x:Key="LightFrame">#f2f2f2</Color>
+    
+    <Color x:Key="DarkPressedButton">#224436</Color>
+    <Color x:Key="LightPressedButton">#b3b3b3</Color>
+    
+    <Color x:Key="DarkBackGround">#1d4d3b</Color>
+    <Color x:Key="LightBackGround">#4a8c6c</Color>
+
+    <Color x:Key="DarkFlyout">#1d4d3b</Color>
+    <Color x:Key="LightFlyout">#4a8c6c</Color>
+
+
 
 
 

@@ -4,14 +4,19 @@
         x:Class="GraficaCurone.View.MainView"
         xmlns:vm="clr-namespace:GraficaCurone.ViewModel"
         xmlns:cv="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
+        xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
         FlyoutBehavior="Flyout"
         FlyoutHeaderBehavior="Fixed"
         FlyoutVerticalScrollMode="Auto"
-        BackgroundColor="#1d4d3b"
+        BackgroundColor="{AppThemeBinding Light={StaticResource LightFlyout}, Dark={StaticResource DarkFlyout}}"
         x:DataType="vm:MainViewModel">
 
+    <Shell.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="{AppThemeBinding Light={StaticResource LightFlyout}, Dark={StaticResource DarkFlyout}}"/>
+    </Shell.Behaviors>
+    
     <Shell.FlyoutHeader>
-        <Grid BackgroundColor="#2c674f"
+        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource LightFlyout}, Dark={StaticResource DarkFlyout}}"
               HeightRequest="70"
               Padding="20,20">
             <Label Text="Parco del Curone"
@@ -22,7 +27,7 @@
         </Grid>
     </Shell.FlyoutHeader>
     <Shell.FlyoutFooter>
-        <Grid BackgroundColor="#2c674f"
+        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource LightFlyout}, Dark={StaticResource DarkFlyout}}"
               HeightRequest="30">
             <Label Text="Copyright 2023 ©"
                    FontSize="Small"
@@ -33,79 +38,66 @@
         </Grid>
     </Shell.FlyoutFooter>
     <FlyoutItem Title="Home" Icon="iconhome.svg" Appearing="OnAppearing">
-        <ContentPage Title="Home" Background="#1d4d3b">
+        <ContentPage Title="Home" Background="{AppThemeBinding Light={StaticResource LightBackGround}, Dark={StaticResource DarkBackGround}}">
             <ScrollView>
                 <VerticalStackLayout Margin="0,20,0,0">
-                    <Grid RowDefinitions="*,20*,*"
-                  ColumnDefinitions="*,*,*,*,10*,*,*,*,*">
+                    <Grid RowDefinitions="*,20*,*" ColumnDefinitions="*,*,*,*,10*,*,*,*,*">
                         <Frame Grid.Row="1"
-                    Grid.Column="3"
-                    Grid.ColumnSpan="3"
-                    CornerRadius="15"
-                    BackgroundColor="#224436"
-                    BorderColor="#224436"
-                    Padding="0">
-                            <Grid ColumnDefinitions="*,*,*"
-                        RowDefinitions="*">
+                            Grid.Column="3"
+                            Grid.ColumnSpan="3"
+                            CornerRadius="15"
+                            Padding="0">
+                            <Grid ColumnDefinitions="*,*,*" RowDefinitions="*">
                                 <!--Tasto Mappa-->
                                 <Button
-                            x:Name="MappaButton"
-                            Grid.Column="0"
-                            Text="Mappa"
-                            CornerRadius="15"
-                            Command="{Binding SwitchPageCommand}"
-                            CommandParameter="showmap"
-                                >
+                                    x:Name="MappaButton"
+                                    Grid.Column="0"
+                                    Text="Mappa"
+                                    CornerRadius="15"
+                                    Command="{Binding SwitchPageCommand}"
+                                    CommandParameter="showmap">
                                     <Button.Triggers>
-                                        <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="True">
+                                        <DataTrigger TargetType="Button" Binding="{Binding MapVisible}" Value="True">
                                             <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPressedButton}, Dark={StaticResource DarkPressedButton}}" />
-                                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
                                         </DataTrigger>
-                                        <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="False">
-                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPressedButton}, Dark={StaticResource DarkPressedButton}}" />
-                                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+                                        <DataTrigger TargetType="Button" Binding="{Binding MapVisible}" Value="False">
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightFrame}, Dark={StaticResource DarkFrame}}" />
                                         </DataTrigger>
                                     </Button.Triggers>
                                 </Button>
                                 
                                 <!--Tasto Bussola-->
                                 <Button
-                            x:Name="BussolaButton"
-                            Grid.Column="1"
-                            Text="Bussola"
-                            CornerRadius="15"
-                            Command="{Binding SwitchPageCommand}"
-                            CommandParameter="showcompass"
-                            BackgroundColor="Transparent">
+                                    x:Name="BussolaButton"
+                                    Grid.Column="1"
+                                    Text="Bussola"
+                                    CornerRadius="15"
+                                    Command="{Binding SwitchPageCommand}"
+                                    CommandParameter="showcompass">
                                     <Button.Triggers>
-                                            <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="True">
-                                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPressedButton}, Dark={StaticResource DarkPressedButton}}" />
-                                                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="False">
-                                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPressedButton}, Dark={StaticResource DarkPressedButton}}" />
-                                                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-                                            </DataTrigger>
+                                            <DataTrigger TargetType="Button" Binding="{Binding CompassVisible}" Value="True">
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPressedButton}, Dark={StaticResource DarkPressedButton}}" />
+                                        </DataTrigger>
+                                            <DataTrigger TargetType="Button" Binding="{Binding CompassVisible}" Value="False">
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightFrame}, Dark={StaticResource DarkFrame}}" />
+                                        </DataTrigger>
                                     </Button.Triggers>
                                 </Button>
                                 <!--Tasto QR Code-->
-                                
+
                                 <Button
-                            x:Name="QRButton"
-                            Grid.Column="2"
-                            Text="QR Code"
-                            CornerRadius="15"    
-                            Command="{Binding SwitchPageCommand}"
-                            CommandParameter="showcamera"
-                            BackgroundColor="Transparent">
+                                    x:Name="QRButton"
+                                    Grid.Column="2"
+                                    Text="QR"
+                                    CornerRadius="15"    
+                                    Command="{Binding SwitchPageCommand}"
+                                    CommandParameter="showcamera">
                                     <Button.Triggers>
                                         <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="True">
                                             <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPressedButton}, Dark={StaticResource DarkPressedButton}}" />
-                                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
                                         </DataTrigger>
                                         <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="False">
-                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPressedButton}, Dark={StaticResource DarkPressedButton}}" />
-                                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightFrame}, Dark={StaticResource DarkFrame}}" />
                                         </DataTrigger>
                                     </Button.Triggers>
                                 </Button>
@@ -114,10 +106,10 @@
                     </Grid>
                     <Frame Margin="20" x:Name="FrameMappa" BackgroundColor="Transparent" Padding="0" BorderColor="Transparent" IsVisible="{Binding MapVisible}">
                         <VerticalStackLayout>
-                            <Frame HeightRequest="300" WidthRequest="300" CornerRadius="15" BackgroundColor="#2c674f">
+                            <Frame HeightRequest="300" WidthRequest="300" CornerRadius="15">
                                 <Image Source="{Binding trackManager.PathImage}" />
                             </Frame>
-                            <Frame Margin="0, 20, 0, 0" HeightRequest="500" CornerRadius="15" BackgroundColor="#2c674f">
+                            <Frame Margin="0, 20, 0, 0" HeightRequest="500" CornerRadius="15">
                                 <ScrollView>
                                     <Label
                                         Text="{Binding trackManager.CurrentText}"
@@ -141,7 +133,7 @@
                                 <Image
                                     x:Name="Bussola"
                                     Rotation="{Binding Rotation}"
-                                    Source="bussolaverd.png"
+                                    Source="bussola.png"
                                     WidthRequest="300"
                                     HeightRequest="300"/>
                             </Grid>
@@ -153,7 +145,7 @@
                                HorizontalOptions="Center"/>
                         </VerticalStackLayout>
                     </Frame>
-                    <Frame x:Name="FrameQR" IsVisible="{Binding CameraVisible}" BackgroundColor="#2c674f" Margin="20">
+                    <Frame x:Name="FrameQR" IsVisible="{Binding CameraVisible}" Margin="20">
                         <VerticalStackLayout
                         x:Name="vStack"
                         Spacing="25"
@@ -169,15 +161,18 @@
         </ContentPage>
     </FlyoutItem>
     <FlyoutItem Title="Impostazioni" Icon="iconsettings.svg">
-        <ContentPage Title="Impostazioni" BackgroundColor="#1d4d3b">
+        <ContentPage Title="Impostazioni" BackgroundColor="{AppThemeBinding Light={StaticResource LightBackGround}, Dark={StaticResource DarkBackGround}}" Padding="10">
             <VerticalStackLayout>
+                <Label Text="Scegli la lingua:"
+                       FontSize="20"
+                       Padding="10, 10, 10, 20"/>
                 <Button x:Name="BottoneLingua" Text="Lingua" HorizontalOptions="Center"
                         Command="{Binding BottoneLinguaClickedCommand}"/>
             </VerticalStackLayout>
         </ContentPage>
     </FlyoutItem>
     <FlyoutItem Title="Aiuto" Icon="iconsinterrogativo.png">
-        <ContentPage Title="Aiuto" BackgroundColor="#1d4d3b">
+        <ContentPage Title="Aiuto" BackgroundColor="{AppThemeBinding Light={StaticResource LightBackGround}, Dark={StaticResource DarkBackGround}}">
 
         </ContentPage>
     </FlyoutItem>

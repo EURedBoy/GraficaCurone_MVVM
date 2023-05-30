@@ -53,7 +53,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\bussolaverd.png" />
+	  <None Remove="Resources\Images\bussola.png" />
 	  <None Remove="Resources\Images\freccia.png" />
 	  <None Remove="Resources\Images\iconhome.svg" />
 	  <None Remove="Resources\Images\iconsettings.svg" />
