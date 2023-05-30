@@ -57,16 +57,17 @@
                             CommandParameter="showmap"
                                 >
                                     <Button.Triggers>
-                                        <DataTrigger TargetType="Button" Binding="{Binding MapVisible}" Value="True">
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                            <Setter Property="TextColor" Value="Black" />
+                                        <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="True">
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPressedButton}, Dark={StaticResource DarkPressedButton}}" />
+                                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
                                         </DataTrigger>
-                                        <DataTrigger TargetType="Button" Binding="{Binding MapVisible}" Value="False">
-                                            <Setter Property="BackgroundColor" Value="#224436" />
-                                            <Setter Property="TextColor" Value="White" />
+                                        <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="False">
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPressedButton}, Dark={StaticResource DarkPressedButton}}" />
+                                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
                                         </DataTrigger>
                                     </Button.Triggers>
                                 </Button>
+                                
                                 <!--Tasto Bussola-->
                                 <Button
                             x:Name="BussolaButton"
@@ -77,17 +78,18 @@
                             CommandParameter="showcompass"
                             BackgroundColor="Transparent">
                                     <Button.Triggers>
-                                        <DataTrigger TargetType="Button" Binding="{Binding CompassVisible}" Value="True">
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                            <Setter Property="TextColor" Value="Black" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Button" Binding="{Binding CompassVisible}" Value="False">
-                                            <Setter Property="BackgroundColor" Value="#224436" />
-                                            <Setter Property="TextColor" Value="White" />
-                                        </DataTrigger>
+                                            <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPressedButton}, Dark={StaticResource DarkPressedButton}}" />
+                                                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="False">
+                                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPressedButton}, Dark={StaticResource DarkPressedButton}}" />
+                                                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+                                            </DataTrigger>
                                     </Button.Triggers>
                                 </Button>
                                 <!--Tasto QR Code-->
+                                
                                 <Button
                             x:Name="QRButton"
                             Grid.Column="2"
@@ -98,12 +100,12 @@
                             BackgroundColor="Transparent">
                                     <Button.Triggers>
                                         <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="True">
-                                            <Setter Property="BackgroundColor" Value="White" />
-                                            <Setter Property="TextColor" Value="Black" />
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPressedButton}, Dark={StaticResource DarkPressedButton}}" />
+                                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
                                         </DataTrigger>
                                         <DataTrigger TargetType="Button" Binding="{Binding CameraVisible}" Value="False">
-                                            <Setter Property="BackgroundColor" Value="#224436" />
-                                            <Setter Property="TextColor" Value="White" />
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightPressedButton}, Dark={StaticResource DarkPressedButton}}" />
+                                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
                                         </DataTrigger>
                                     </Button.Triggers>
                                 </Button>
