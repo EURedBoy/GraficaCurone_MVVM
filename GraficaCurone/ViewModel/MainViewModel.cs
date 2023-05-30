@@ -134,7 +134,6 @@ namespace GraficaCurone.ViewModel
             MapVisible = false;
             CompassVisible = false;
             CameraVisible = true;
-
             mainView.camera.BarCodeDetectionEnabled = true;
         }
 
