@@ -106,7 +106,7 @@
                             </Grid>
                         </Frame>
                     </Grid>
-                    <Frame Margin="20" Content="{Binding CurrentPage}" BackgroundColor="Transparent" Padding="0" BorderColor="Transparent"/>
+                    <Border Margin="20" Content="{Binding CurrentPage}" BackgroundColor="Transparent" Padding="0" StrokeThickness="0"/>
                     <!--<Frame Margin="20" x:Name="FrameMappa" BackgroundColor="Transparent" Padding="0" BorderColor="Transparent" IsVisible="{Binding MapVisible}">
                         <VerticalStackLayout>
                             <Frame HeightRequest="300" WidthRequest="300" CornerRadius="15">

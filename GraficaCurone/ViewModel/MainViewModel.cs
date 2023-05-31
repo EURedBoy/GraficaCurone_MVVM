@@ -200,7 +200,7 @@ namespace GraficaCurone.ViewModel
             MainThread.BeginInvokeOnMainThread(async() =>
             {
                 await trackManager.PlayTheTrack(int.Parse(args.Result[0].Text) - 1);
-                mainView.camera.BarCodeDetectionEnabled = false;
+                ShowMap();
                 MapVisible = true;
                 CompassVisible = false;
                 CameraVisible = false;
@@ -210,28 +210,7 @@ namespace GraficaCurone.ViewModel
 
         #endregion
 
-        //public void PdfViewerPage(string pdfFilePath)
-        //{
-        //    if (File.Exists(pdfFilePath))
-        //    {
-        //        using (var stream = new FileStream(pdfFilePath, FileMode.Open))
-        //        {
-        //            var document = PdfDocument.Load(stream);
-
-        //            var imageSource = ImageSource.FromStream(() =>
-        //            {
-        //                var memoryStream = new MemoryStream();
-        //                document.
-        //                document.Render(0, 300, 300, true).Save(memoryStream, Microsoft.Maui.Graphics.ImageFormat.Png);
-        //                memoryStream.Seek(0, SeekOrigin.Begin);
-        //                return memoryStream;
-        //            });
-
-        //            var image = new Image { Source = imageSource };
-        //            Content = new ScrollView { Content = image };
-        //        }
-        //    }
-        //}
+        
 
         [RelayCommand]
         private async void SaveFile()

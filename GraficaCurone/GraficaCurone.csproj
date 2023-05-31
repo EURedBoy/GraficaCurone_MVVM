@@ -12,7 +12,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>GraficaCurone</ApplicationTitle>
+		<ApplicationTitle>CuroneSteps</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.graficacurone</ApplicationId>
