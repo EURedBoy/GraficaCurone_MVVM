@@ -1,11 +1,12 @@
-﻿using Android.Service.Voice;
-using Camera.MAUI;
+﻿using Camera.MAUI;
 using Camera.MAUI.ZXingHelper;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GraficaCurone.Manager;
 using GraficaCurone.View;
 using Plugin.Maui.Audio;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Storage;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +14,11 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Plugin.NFC;
+using PdfiumViewer;
+using System.Threading;
+using GraficaCurone.Utils;
+
 namespace GraficaCurone.ViewModel
 {
     public partial class MainViewModel : ObservableObject
@@ -30,35 +36,44 @@ namespace GraficaCurone.ViewModel
         private double rotation;
         [ObservableProperty]
         private string textCompass;
+        [ObservableProperty] private Microsoft.Maui.Controls.View currentPage;
         [ObservableProperty]
         public LocalizationResourceManager localizationManager = LocalizationResourceManager.Instance;
 
         private CameraView cameraView;
         private MainView mainView;
+        private bool isBusy;
+
         public NFCManager nfcManager { get; set; }
         public TrackManager trackManager { get; set; }
+        public IFileSaver fileSaver;
+        public CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
         #endregion
 
-        public void ControlloNFC()
-        {
-            bool c = true;
-            while (c)
-            {
-                if (nfcManager.NfcIsEnabled)
-                {
-                    c = false;
-                }
-            }
-        }
+        //public void ControlloNFC()
+        //{
+        //    bool c = true;
+        //    while (c)
+        //    {
+        //        if (nfcManager.NfcIsEnabled)
+        //        {
+        //            c = false;
+        //        }
+        //    }
+        //}
+
         public MainViewModel(MainView mainView) 
         {
-            Thread thread = new Thread(ControlloNFC);
-            thread.Start();
-            MapVisible = true;
+            //Thread thread = new Thread(ControlloNFC);
+            //thread.Start();
+            //MapVisible = true;
             this.mainView = mainView;
             cameraView = mainView.camera;
             trackManager = new TrackManager(AudioManager.Current);
             nfcManager = new NFCManager(trackManager, this);
+            fileSaver = FileSaver.Default;
+
+            ShowMap();
         }
 
         #region MetodiPagine
@@ -121,6 +136,9 @@ namespace GraficaCurone.ViewModel
             MapVisible = true;
             CompassVisible= false;
             CameraVisible= false;
+
+            CurrentPage = null;
+            CurrentPage = new MapPage(this).Content;
         }
         #endregion
 
@@ -138,6 +156,8 @@ namespace GraficaCurone.ViewModel
                     Compass.Default.ReadingChanged += Compass_ReadingChanged;
                     Compass.Default.Start(SensorSpeed.Game);
                 }
+                CurrentPage = null;
+                CurrentPage = new CompassPage(this).Content;
             }
         }
         private void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
@@ -149,12 +169,14 @@ namespace GraficaCurone.ViewModel
 
         #region Camera
 
-        private async void ShowCamera()
+        public async void ShowCamera()
         {
             MapVisible = false;
             CompassVisible = false;
             CameraVisible = true;
-            mainView.camera.BarCodeDetectionEnabled = true;
+
+            CurrentPage = null;
+            CurrentPage = new QrCodePage(this).Content;
         }
 
         public async Task CameraLoadAsync()
@@ -188,5 +210,61 @@ namespace GraficaCurone.ViewModel
 
         #endregion
 
+        //public void PdfViewerPage(string pdfFilePath)
+        //{
+        //    if (File.Exists(pdfFilePath))
+        //    {
+        //        using (var stream = new FileStream(pdfFilePath, FileMode.Open))
+        //        {
+        //            var document = PdfDocument.Load(stream);
+
+        //            var imageSource = ImageSource.FromStream(() =>
+        //            {
+        //                var memoryStream = new MemoryStream();
+        //                document.
+        //                document.Render(0, 300, 300, true).Save(memoryStream, Microsoft.Maui.Graphics.ImageFormat.Png);
+        //                memoryStream.Seek(0, SeekOrigin.Begin);
+        //                return memoryStream;
+        //            });
+
+        //            var image = new Image { Source = imageSource };
+        //            Content = new ScrollView { Content = image };
+        //        }
+        //    }
+        //}
+
+        [RelayCommand]
+        private async void SaveFile()
+        {
+            if (isBusy) return;
+            //isBusy = true;
+
+            CrossNFC.Current.StopListening();
+            //var externalDir = FileSystem.AppDataDirectory;
+            //var externalDownloadDir = Path.Combine(externalDir, "Download");
+            var fileStream = await FileSystem.Current.OpenAppPackageFileAsync("documentazione_applicazione_curone.pdf");
+
+            bool status = await PermissionUtils.CheckForStoragePermission();
+            if (!status) return;
+
+            var result = await FolderPicker.Default.PickAsync(CancellationToken.None);
+            if (!result.IsSuccessful) return;
+
+            var endStream = File.Create(Path.Combine(result.Folder.Path, "documentazione_applicazione_curone.pdf"));
+            await fileStream.CopyToAsync(endStream);
+
+            isBusy = false;
+
+
+            //var path = await FileSaver.Default.SaveAsync(Path.Combine(result.Folder.Path, "documentazione_applicazione_curone.pdf"), fileStream, CancellationTokenSource.Token);
+            //if (path.IsSuccessful)
+            //{
+            //    await Toast.Make($"The file was saved successfully to location: {path.FilePath}").Show(default);
+            //}
+            //else
+            //{
+            //    await Toast.Make($"The file was not saved successfully with error: {path.Exception.Message}").Show(default);
+            //}
+        }
     }
 }

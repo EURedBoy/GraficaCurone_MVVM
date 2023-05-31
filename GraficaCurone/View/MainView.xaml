@@ -106,7 +106,8 @@
                             </Grid>
                         </Frame>
                     </Grid>
-                    <Frame Margin="20" x:Name="FrameMappa" BackgroundColor="Transparent" Padding="0" BorderColor="Transparent" IsVisible="{Binding MapVisible}">
+                    <Frame Margin="20" Content="{Binding CurrentPage}" BackgroundColor="Transparent" Padding="0" BorderColor="Transparent"/>
+                    <!--<Frame Margin="20" x:Name="FrameMappa" BackgroundColor="Transparent" Padding="0" BorderColor="Transparent" IsVisible="{Binding MapVisible}">
                         <VerticalStackLayout>
                             <Frame HeightRequest="300" WidthRequest="300" CornerRadius="15">
                                 <Image Source="{Binding trackManager.PathImage}" />
@@ -156,7 +157,7 @@
                                        CamerasLoaded="CameraLoaded"
                                        BarcodeDetected="BarcodeDetected"/>
                         </VerticalStackLayout>
-                    </Frame>
+                    </Frame>-->
                 </VerticalStackLayout>
             </ScrollView>
         </ContentPage>
@@ -175,7 +176,7 @@
     </FlyoutItem>
     <FlyoutItem Title="{Binding LocalizationManager[Aiuto],Mode=OneWay}" Icon="iconsinterrogativo.png">
         <ContentPage Title="Aiuto" BackgroundColor="{AppThemeBinding Light={StaticResource LightBackGround}, Dark={StaticResource DarkBackGround}}">
-
+            <Button Text="Leggi la documentazione di questa applicazione!" Command="{Binding SaveFileCommand}"/>
         </ContentPage>
     </FlyoutItem>
 </Shell>

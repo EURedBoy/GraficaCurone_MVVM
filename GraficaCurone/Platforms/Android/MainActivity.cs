@@ -20,7 +20,7 @@ public class MainActivity : MauiAppCompatActivity
     }
 
     protected override void OnResume()
-    {
+    {   
         CrossNFC.OnResume();
         base.OnResume();
     }
