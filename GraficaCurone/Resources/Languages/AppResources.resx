@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Aiuto" xml:space="preserve">
+    <value>Aiuto</value>
+  </data>
+  <data name="Buss" xml:space="preserve">
+    <value>Bussola</value>
+  </data>
   <data name="Imp" xml:space="preserve">
     <value>Impostazioni</value>
+  </data>
+  <data name="Leng" xml:space="preserve">
+    <value>Lingua</value>
+  </data>
+  <data name="Mappa" xml:space="preserve">
+    <value>Mappa</value>
+  </data>
+  <data name="TestoLingua" xml:space="preserve">
+    <value>Scegli la lingua:</value>
   </data>
 </root>

@@ -1,4 +1,5 @@
-﻿using Camera.MAUI;
+﻿using Android.Service.Voice;
+using Camera.MAUI;
 using Camera.MAUI.ZXingHelper;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -8,6 +9,7 @@ using Plugin.Maui.Audio;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +30,8 @@ namespace GraficaCurone.ViewModel
         private double rotation;
         [ObservableProperty]
         private string textCompass;
-
+        [ObservableProperty]
+        public LocalizationResourceManager localizationManager = LocalizationResourceManager.Instance;
 
         private CameraView cameraView;
         private MainView mainView;
@@ -36,9 +39,21 @@ namespace GraficaCurone.ViewModel
         public TrackManager trackManager { get; set; }
         #endregion
 
-
+        public void ControlloNFC()
+        {
+            bool c = true;
+            while (c)
+            {
+                if (nfcManager.NfcIsEnabled)
+                {
+                    c = false;
+                }
+            }
+        }
         public MainViewModel(MainView mainView) 
         {
+            Thread thread = new Thread(ControlloNFC);
+            thread.Start();
             MapVisible = true;
             this.mainView = mainView;
             cameraView = mainView.camera;
@@ -57,19 +72,24 @@ namespace GraficaCurone.ViewModel
             if (linguaScelta == "italiano")
             {
                 trackManager.InEnglish = false;
+                LocalizationResourceManager.Instance.SettaCultura(new CultureInfo("it-IT"));
             }
             else if(linguaScelta == "english")
             {
                 trackManager.InEnglish = true;
+                LocalizationResourceManager.Instance.SettaCultura(new CultureInfo("en-gb"));
             }
             else
             {
                 return;
             }
             
-            await trackManager.LoadTracksAsync();
-            trackManager.secondi = trackManager.player.CurrentPosition;
-            await trackManager.PlayTheTrack(trackManager.LastTrack);
+            if (trackManager.player != null && trackManager.player.IsPlaying)
+            {
+                await trackManager.LoadTracksAsync();
+                trackManager.secondi = trackManager.player.CurrentPosition;
+                await trackManager.PlayTheTrack(trackManager.LastTrack);
+            }
         }
 
         #region ChooseThePage
@@ -157,7 +177,7 @@ namespace GraficaCurone.ViewModel
             if (args == null) { }
             MainThread.BeginInvokeOnMainThread(async() =>
             {
-                await trackManager.PlayTheTrack(int.Parse(args.Result[0].Text));
+                await trackManager.PlayTheTrack(int.Parse(args.Result[0].Text) - 1);
                 mainView.camera.BarCodeDetectionEnabled = false;
                 MapVisible = true;
                 CompassVisible = false;

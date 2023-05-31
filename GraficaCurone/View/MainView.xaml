@@ -53,7 +53,7 @@
                                 <Button
                                     x:Name="MappaButton"
                                     Grid.Column="0"
-                                    Text="Mappa"
+                                    Text="{Binding LocalizationManager[Mappa],Mode=OneWay}"
                                     CornerRadius="15"
                                     Command="{Binding SwitchPageCommand}"
                                     CommandParameter="showmap">
@@ -71,8 +71,9 @@
                                 <Button
                                     x:Name="BussolaButton"
                                     Grid.Column="1"
-                                    Text="Bussola"
+                                    Text="{Binding LocalizationManager[Buss],Mode=OneWay}"
                                     CornerRadius="15"
+                                    Padding="0"
                                     Command="{Binding SwitchPageCommand}"
                                     CommandParameter="showcompass">
                                     <Button.Triggers>
@@ -114,7 +115,6 @@
                                 <ScrollView>
                                     <Label
                                         Text="{Binding trackManager.CurrentText}"
-                                       TextColor="White"
                                        FontSize="15"
                                        FontAttributes="Bold"
                                        HorizontalTextAlignment="Center" />
@@ -161,18 +161,19 @@
             </ScrollView>
         </ContentPage>
     </FlyoutItem>
-    <FlyoutItem Title="{}" Icon="iconsettings.svg">
-        <ContentPage Title="Impostazioni" BackgroundColor="{AppThemeBinding Light={StaticResource LightBackGround}, Dark={StaticResource DarkBackGround}}" Padding="10">
+    <FlyoutItem Title="{Binding LocalizationManager[Imp],Mode=OneWay}" Icon="iconsettings.svg">
+        <ContentPage Title="{Binding LocalizationManager[Leng],Mode=OneWay}" BackgroundColor="{AppThemeBinding Light={StaticResource LightBackGround}, Dark={StaticResource DarkBackGround}}" Padding="10">
             <VerticalStackLayout>
-                <Label Text="Scegli la lingua:"
+                <Label Text="{Binding LocalizationManager[TestoLingua],Mode=OneWay}"
                        FontSize="20"
+                       TextColor="White"
                        Padding="10, 10, 10, 20"/>
                 <Button x:Name="BottoneLingua" Text="Lingua" HorizontalOptions="Center"
                         Command="{Binding BottoneLinguaClickedCommand}"/>
             </VerticalStackLayout>
         </ContentPage>
     </FlyoutItem>
-    <FlyoutItem Title="Aiuto" Icon="iconsinterrogativo.png">
+    <FlyoutItem Title="{Binding LocalizationManager[Aiuto],Mode=OneWay}" Icon="iconsinterrogativo.png">
         <ContentPage Title="Aiuto" BackgroundColor="{AppThemeBinding Light={StaticResource LightBackGround}, Dark={StaticResource DarkBackGround}}">
 
         </ContentPage>
