@@ -216,7 +216,7 @@ namespace GraficaCurone.ViewModel
         private async void SaveFile()
         {
             if (isBusy) return;
-            //isBusy = true;
+            isBusy = true;
 
             CrossNFC.Current.StopListening();
             //var externalDir = FileSystem.AppDataDirectory;
@@ -226,11 +226,16 @@ namespace GraficaCurone.ViewModel
             bool status = await PermissionUtils.CheckForStoragePermission();
             if (!status) return;
 
-            var result = await FolderPicker.Default.PickAsync(CancellationToken.None);
-            if (!result.IsSuccessful) return;
+            var docsDirectory = Android.App.Application.Context.GetExternalFilesDir(Android.OS.Environment.DirectoryDocuments);
+            //var result = await FolderPicker.Default.PickAsync(CancellationToken.None);
+            //if (!result.IsSuccessful) return;
 
-            var endStream = File.Create(Path.Combine(result.Folder.Path, "documentazione_applicazione_curone.pdf"));
+            var endStream = File.Create(Path.Combine(docsDirectory.Path, "documentazione_applicazione_curone.pdf"));
             await fileStream.CopyToAsync(endStream);
+
+            await App.Current.MainPage.DisplayAlert("Alert", "File salvato in: " + docsDirectory.Path, "OK");
+
+            CrossNFC.Current.StartListening();
 
             isBusy = false;
 

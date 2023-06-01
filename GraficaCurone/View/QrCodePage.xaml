@@ -4,13 +4,16 @@
              xmlns:maui="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
              x:Class="GraficaCurone.View.QrCodePage"
              Title="QrCodePage">
-    <VerticalStackLayout
+    <Frame x:Name="FrameQR" IsVisible="{Binding CameraVisible}" Margin="20">
+
+        <VerticalStackLayout
             x:Name="stack"
             Spacing="25"
             Padding="30,0"
             VerticalOptions="Center">
-        <maui:CameraView x:Name="cameraView" WidthRequest="400" HeightRequest="300" BarCodeDetectionEnabled="True"
+            <maui:CameraView x:Name="cameraView" WidthRequest="400" HeightRequest="300" BarCodeDetectionEnabled="True"
                              CamerasLoaded="CameraLoaded"
                              BarcodeDetected="BarcodeDetected"/>
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Frame>
 </ContentPage>
