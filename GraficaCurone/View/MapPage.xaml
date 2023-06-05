@@ -13,7 +13,6 @@
             <ScrollView>
                 <Label
                         Text="{Binding trackManager.CurrentText}"
-                        TextColor="White"
                         FontSize="15"
                         FontAttributes="Bold"
                         HorizontalTextAlignment="Center" />

@@ -54,6 +54,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiAsset Remove="Resources\File\documentazione_applicazione_curone.pdf" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Images\bussola.png" />
 	  <None Remove="Resources\Images\freccia.png" />
 	  <None Remove="Resources\Images\iconhome.svg" />
@@ -61,6 +65,10 @@
 	  <None Remove="Resources\Images\iconsinterrogativo.png" />
 	  <None Remove="Resources\Images\menu.png" />
 	  <None Remove="Resources\Images\menugif.gif" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\File\documentazione_applicazione_curone.pdf" />
 	</ItemGroup>
 
 	<ItemGroup>

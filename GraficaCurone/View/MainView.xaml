@@ -167,9 +167,8 @@
             <VerticalStackLayout>
                 <Label Text="{Binding LocalizationManager[TestoLingua],Mode=OneWay}"
                        FontSize="20"
-                       TextColor="White"
                        Padding="10, 10, 10, 20"/>
-                <Button x:Name="BottoneLingua" Text="Lingua" HorizontalOptions="Center"
+                <Button x:Name="BottoneLingua" Text="{Binding LocalizationManager[Leng],Mode=OneWay}" HorizontalOptions="Center"
                         Command="{Binding BottoneLinguaClickedCommand}"/>
             </VerticalStackLayout>
         </ContentPage>

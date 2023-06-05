@@ -154,7 +154,7 @@ namespace GraficaCurone.ViewModel
                 {
                     // Turn on compass
                     Compass.Default.ReadingChanged += Compass_ReadingChanged;
-                    Compass.Default.Start(SensorSpeed.Game);
+                    Compass.Default.Start(SensorSpeed.Fastest);
                 }
                 CurrentPage = null;
                 CurrentPage = new CompassPage(this).Content;
